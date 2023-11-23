@@ -4,16 +4,23 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./pages/Components/Navbar";
 import { Box } from "@chakra-ui/react";
-import image from "./assets/employee_background.jpg";
+import About from "./pages/About";
+import Register from "./pages/Register";
+import Payroll from "./pages/HR/Payroll";
+import HrEmployee from "./pages/HR/Payroll/Employee";
 
 function App() {
   return (
-    <Box backgroundImage={image} h="100vh" w="100vw">
+    <Box h="100vh" w="100vw" display="flex" flexDir="column">
       <Router>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/payroll" element={<Payroll />} />
+          <Route path="/hr-employee" element={<HrEmployee />} />
         </Routes>
       </Router>
     </Box>
