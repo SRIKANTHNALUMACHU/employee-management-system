@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Register from "./pages/Register";
 import Payroll from "./pages/HR/Payroll";
 import HrEmployee from "./pages/HR/Payroll/Employee";
+import AddEmployee from "./pages/HR/Payroll/Employee/add";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/payroll" element={<Payroll />} />
           <Route path="/hr-employee" element={<HrEmployee />} />
+          <Route path="/hr/add-employee" element={<AddEmployee />} />
         </Routes>
       </Router>
     </Box>

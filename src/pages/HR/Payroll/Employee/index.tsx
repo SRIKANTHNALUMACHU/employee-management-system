@@ -2,30 +2,29 @@ import { Box, HStack, Heading, Button } from "@chakra-ui/react";
 import { FaUserTie } from "react-icons/fa";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import { getEmployees } from "../../../../apis/resource1";
-import {useEffect,useState, useMemo} from "react";
-import { useTable, useBlockLayout, useColumnOrder } from "react-table";
+import { useEffect, useState, useMemo } from "react";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { useTable } from "react-table";
 import { Table, Thead, Tbody, Tr, Th, Td, Stack } from "@chakra-ui/react";
 
-
 const HrEmployee = () => {
-  const [data, setData]=useState([])
-  useEffect(()=>{
+  const [data, setData] = useState([]);
+  useEffect(() => {
     async function getData() {
-      
-    
-     await getEmployees().then((res)=>{
-      console.log("res",res)
-      setData(res)
-     }).catch((err)=>{
-      console.log("error is",err)
-     })
-   
+      await getEmployees()
+        .then((res) => {
+          console.log("res", res);
+          setData(res);
+        })
+        .catch((err) => {
+          console.log("error is", err);
+        });
     }
-    getData()
-   
-  },[])
+    getData();
+  }, []);
   const onClickAdd = () => {
     console.log("Add button clicked");
+    navigate("/hr/add-employee");
   };
   const columns = useMemo(
     () => [
@@ -63,12 +62,10 @@ const HrEmployee = () => {
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
-      {
-        columns,
-        data,
-      }
-    );
+    useTable({
+      columns,
+      data,
+    });
   return (
     <Box backgroundColor="#ECF8F9" w="100vw" h="100vh" overflow="scroll">
       <Table {...getTableProps()} variant="unstyled" borderRadius="0.313rem">
