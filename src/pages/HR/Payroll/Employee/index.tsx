@@ -5,10 +5,12 @@ import { getAllEmployees } from "../../../../apis/resource1";
 import { useEffect, useState, useMemo } from "react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useTable } from "react-table";
+import {useNavigate} from "react-router-dom"
 import { Table, Thead, Tbody, Tr, Th, Td, Stack } from "@chakra-ui/react";
 
 const HrEmployee = () => {
   const [data, setData] = useState([]);
+  const navigate=useNavigate()
   useEffect(() => {
     async function getData() {
       await getAllEmployees()
@@ -57,6 +59,9 @@ const HrEmployee = () => {
         Header: "Designation",
         accessor: "designation",
       },
+      {
+        Header:"Actions"
+      }
     ],
     []
   );
@@ -108,6 +113,7 @@ const HrEmployee = () => {
                 {row.cells.map((cell, i) => {
                   if (cell.column.Header === "Actions") {
                     return (
+                      <Td>
                       <Stack
                         direction={"row"}
                         spacing="24px"
@@ -133,6 +139,7 @@ const HrEmployee = () => {
                           }}
                         />
                       </Stack>
+                      </Td>
                     );
                   }
                   if (cell.column.Header === "Hired Date") {
