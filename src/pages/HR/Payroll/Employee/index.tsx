@@ -6,9 +6,11 @@ import { useEffect, useState, useMemo } from "react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useTable } from "react-table";
 import { Table, Thead, Tbody, Tr, Th, Td, Stack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const HrEmployee = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     async function getData() {
       await getAllEmployees()
