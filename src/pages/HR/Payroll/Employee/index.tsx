@@ -1,7 +1,7 @@
 import { Box, HStack, Heading, Button } from "@chakra-ui/react";
 import { FaUserTie } from "react-icons/fa";
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import { getEmployees } from "../../../../apis/resource1";
+import { getAllEmployees } from "../../../../apis/resource1";
 import { useEffect, useState, useMemo } from "react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useTable } from "react-table";
@@ -11,7 +11,7 @@ const HrEmployee = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     async function getData() {
-      await getEmployees()
+      await getAllEmployees()
         .then((res) => {
           console.log("res", res);
           setData(res);
@@ -68,6 +68,19 @@ const HrEmployee = () => {
     });
   return (
     <Box backgroundColor="#ECF8F9" w="100vw" h="100vh" overflow="scroll">
+      <Box display="flex">
+        <HStack>
+          <FaUserTie />
+          <Heading> Employee Details</Heading>
+          <Button
+            aria-label="none"
+            rightIcon={<PlusSquareIcon />}
+            onClick={onClickAdd}
+          >
+            Add
+          </Button>
+        </HStack>
+      </Box>
       <Table {...getTableProps()} variant="unstyled" borderRadius="0.313rem">
         <Thead bg="#FFF" boxShadow="md">
           {headerGroups.map((headerGroup) => (
@@ -122,7 +135,7 @@ const HrEmployee = () => {
                       </Stack>
                     );
                   }
-                  if (cell.column.Header === "Hired Date"){
+                  if (cell.column.Header === "Hired Date") {
                     return (
                       <Td
                         {...cell.getCellProps()}
@@ -133,8 +146,8 @@ const HrEmployee = () => {
                         color="#545454"
                       >
                         {cell.value.toString().split("T")[0]}
-                       
-                      </Td>)
+                      </Td>
+                    );
                   }
                   return (
                     <Td
