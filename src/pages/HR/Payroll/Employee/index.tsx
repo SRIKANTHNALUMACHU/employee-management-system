@@ -125,6 +125,20 @@ const HrEmployee = () => {
                       </Stack>
                     );
                   }
+                  if (cell.column.Header === "Hired Date"){
+                    return (
+                      <Td
+                        {...cell.getCellProps()}
+                        key={i}
+                        fontSize="0.875rem"
+                        lineHeight="1.313rem"
+                        fontStyle="normal"
+                        color="#545454"
+                      >
+                        {cell.value.toString().split("T")[0]}
+                       
+                      </Td>)
+                  }
                   return (
                     <Td
                       {...cell.getCellProps()}
