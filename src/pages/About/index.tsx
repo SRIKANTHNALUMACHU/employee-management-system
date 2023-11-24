@@ -78,15 +78,7 @@ const About = () => {
     ],
     []
   );
-  // id: number;
-  // name: string;
-  // email: string;
-  // channel: string;
-  // address: string;
-  // postal: string;
-  // city: string;
-  // province: string;
-  // country: string;
+
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
