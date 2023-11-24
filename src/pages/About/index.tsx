@@ -139,6 +139,7 @@ const About = () => {
                           h={6}
                           color="red.500"
                           onClick={() => {
+                            console.log(data[i]);
                             console.log("Ddfd");
                           }}
                         />
