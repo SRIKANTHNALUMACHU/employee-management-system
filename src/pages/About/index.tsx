@@ -1,8 +1,9 @@
 import { Box } from "@chakra-ui/react";
 import { useState, useEffect, useMemo } from "react";
-import { useTable } from "react-table";
+import { useTable, useBlockLayout, useColumnOrder } from "react-table";
 import "./index.css";
-import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, Stack } from "@chakra-ui/react";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 const About = () => {
   const [data, setData] = useState([
     {
@@ -37,6 +38,7 @@ const About = () => {
       {
         Header: "Address.",
         accessor: "address",
+        sticky: "left",
       },
       {
         Header: "Channel",
@@ -70,6 +72,9 @@ const About = () => {
         Header: "Point Name",
         accessor: "name",
       },
+      {
+        Header: "Actions",
+      },
     ],
     []
   );
@@ -84,12 +89,16 @@ const About = () => {
   // country: string;
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({
-      columns,
-      data,
-    });
+    useTable(
+      {
+        columns,
+        data,
+      },
+      useBlockLayout,
+      useColumnOrder
+    );
   return (
-    <Box backgroundColor="#ECF8F9" w="100vw" h="100vh">
+    <Box backgroundColor="#ECF8F9" w="100vw" h="100vh" overflow="scroll">
       <Table {...getTableProps()} variant="unstyled" borderRadius="0.313rem">
         <Thead bg="#FFF" boxShadow="md">
           {headerGroups.map((headerGroup) => (
@@ -115,6 +124,35 @@ const About = () => {
             return (
               <Tr {...row.getRowProps()}>
                 {row.cells.map((cell, i) => {
+                  if (cell.column.Header === "Actions") {
+                    return (
+                      <Stack
+                        direction={"row"}
+                        spacing="24px"
+                        alignItems="center"
+                        paddingLeft="1rem"
+                      >
+                        <EditIcon
+                          _hover={{ cursor: "pointer" }}
+                          w={6}
+                          h={6}
+                          color="black.500"
+                          onClick={() => {
+                            console.log("edit icon");
+                          }}
+                        />
+                        <DeleteIcon
+                          _hover={{ cursor: "pointer" }}
+                          w={6}
+                          h={6}
+                          color="red.500"
+                          onClick={() => {
+                            console.log("Ddfd");
+                          }}
+                        />
+                      </Stack>
+                    );
+                  }
                   return (
                     <Td
                       {...cell.getCellProps()}
@@ -131,6 +169,15 @@ const About = () => {
               </Tr>
             );
           })}
+
+          <Tr>
+            <Td
+              fontSize="0.875rem"
+              lineHeight="1.313rem"
+              fontStyle="normal"
+              color="#545454"
+            ></Td>
+          </Tr>
         </Tbody>
       </Table>
     </Box>
