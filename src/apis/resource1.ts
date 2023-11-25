@@ -4,7 +4,7 @@ const getAllEmployees = async (): Promise<AxiosResponse> => {
   return new Promise((resolve) => {
     axios({
       method: "GET",
-      url: "https://8473-2600-6c5a-7f-a54c-3552-5e6c-20af-c494.ngrok-free.app/empdata/getAllEmployees",
+      url: "http://localhost:8080/empdata/getAllEmployees",
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
@@ -20,11 +20,32 @@ const getAllEmployees = async (): Promise<AxiosResponse> => {
   });
 };
 
+const deleteEmployee  = async (id:number): Promise<AxiosResponse> =>{
+  console.log("id is",id)
+  return new Promise((resolve) => {
+    axios({
+      method: "DELETE",
+      url: "http://localhost:8080/empdata/delete/"+id,
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+    })
+      .then((response) => {
+        console.log("dfere", response);
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log("Error is", error);
+      });
+  });
+}
+
 const addEmployee = async (data: Object): Promise<AxiosResponse> => {
   return new Promise((resolve) => {
     axios({
       method: "POST",
-      url: "https://8473-2600-6c5a-7f-a54c-3552-5e6c-20af-c494.ngrok-free.app/empdata/create",
+      url: "http://localhost:8080/empdata/create",
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
@@ -40,4 +61,24 @@ const addEmployee = async (data: Object): Promise<AxiosResponse> => {
   });
 };
 
-export { getAllEmployees, addEmployee };
+
+const editEmployee = async (data: Object, id: number): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/empdata/update/"+id,
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      data: data,
+    })
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        console.log("error is", error);
+      });
+  });
+};
+export { getAllEmployees, addEmployee ,deleteEmployee, editEmployee};

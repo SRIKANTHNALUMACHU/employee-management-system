@@ -9,24 +9,36 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { addEmployee } from "../../../../apis/resource1";
+import { useNavigate } from "react-router-dom";
 
 const AddEmployee = () => {
   const [data, setData] = useState({
-    email: "",
+    emailId: "",
     designation: "",
     hiredate: "",
     gender: "Male",
     phone: "",
     lastName: "",
     firstName: "",
-  });
-  const handleSubmit = (e) => {
+    ssn:"777"
+  }); 
+  const navigate=useNavigate()
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("add employee");
     console.log(data);
+    await addEmployee(data).then(()=>{
+      console.log("added ")
+      navigate('/hr-employee')
+    }).catch((err)=>{
+      console.log("error is",err)
+    })
+
   };
   const onChangeInput = (e) => {
-    setData({ [e.target.name]: e.target.value, ...data });
+    setData({ ...data,[e.target.name]: e.target.value  });
   };
 
   return (
@@ -54,6 +66,7 @@ const AddEmployee = () => {
               onChange={(e) => {
                 onChangeInput(e);
               }}
+              value={data.firstName}
             />
           </FormControl>
           <FormControl>
@@ -72,7 +85,7 @@ const AddEmployee = () => {
             <Input
               type="email"
               id="email"
-              name="email"
+              name="emailId"
               onChange={(e) => {
                 onChangeInput(e);
               }}
@@ -105,7 +118,7 @@ const AddEmployee = () => {
           <FormControl>
             <FormLabel htmlFor="hiredate">Hire Date</FormLabel>
             <Input
-              type="datetime-local"
+              type="date"
               id="hiredate"
               name="hiredate"
               onChange={(e) => {

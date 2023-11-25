@@ -1,16 +1,16 @@
 import { Box, HStack, Heading, Button } from "@chakra-ui/react";
 import { FaUserTie } from "react-icons/fa";
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import { getAllEmployees } from "../../../../apis/resource1";
+import { deleteEmployee, getAllEmployees } from "../../../../apis/resource1";
 import { useEffect, useState, useMemo } from "react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useTable } from "react-table";
 import {useNavigate} from "react-router-dom"
 import { Table, Thead, Tbody, Tr, Th, Td, Stack } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 
 const HrEmployee = () => {
   const [data, setData] = useState([]);
+  const [dataChanged,setDataChanged]=useState(false)
   const navigate = useNavigate();
   useEffect(() => {
     async function getData() {
@@ -24,7 +24,7 @@ const HrEmployee = () => {
         });
     }
     getData();
-  }, []);
+  }, [dataChanged]);
   const onClickAdd = () => {
     console.log("Add button clicked");
     navigate("/hr/add-employee");
@@ -114,7 +114,7 @@ const HrEmployee = () => {
                 {row.cells.map((cell, i) => {
                   if (cell.column.Header === "Actions") {
                     return (
-                      <Td>
+                      <Td key={i}>
                       <Stack
                         direction={"row"}
                         spacing="24px"
@@ -127,7 +127,9 @@ const HrEmployee = () => {
                           h={6}
                           color="black.500"
                           onClick={() => {
-                            console.log("edit icon");
+
+                            navigate("/hr/edit-employee",{state:cell.row.original})
+                            //console.log("edit icon",cell.row.original);
                           }}
                         />
                         <DeleteIcon
@@ -135,8 +137,15 @@ const HrEmployee = () => {
                           w={6}
                           h={6}
                           color="red.500"
-                          onClick={() => {
-                            console.log("Ddfd");
+                          onClick={async() => {
+                           await deleteEmployee(cell.row.original?.empId).then(()=>{
+                              console.log("successfully deleted")
+                            }).catch((err)=>{
+                              console.log("error while deletion")
+                            })
+                            setDataChanged(!dataChanged
+                              )
+                            
                           }}
                         />
                       </Stack>
@@ -153,7 +162,8 @@ const HrEmployee = () => {
                         fontStyle="normal"
                         color="#545454"
                       >
-                        {cell.value.toString().split("T")[0]}
+                        {console.log("cell",cell.row.original?.empId)}
+                        {cell?.value?.toString()?.split("T")[0]}
                       </Td>
                     );
                   }

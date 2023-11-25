@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Payroll from "./pages/HR/Payroll";
 import HrEmployee from "./pages/HR/Payroll/Employee";
 import AddEmployee from "./pages/HR/Payroll/Employee/add";
+import EditEmployee from "./pages/HR/Payroll/Employee/edit";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/payroll" element={<Payroll />} />
           <Route path="/hr-employee" element={<HrEmployee />} />
           <Route path="/hr/add-employee" element={<AddEmployee />} />
+          <Route path="/hr/edit-employee" element={<EditEmployee/>}/>
         </Routes>
       </Router>
     </Box>
