@@ -1,4 +1,4 @@
-import { Box, HStack, Heading, Button } from "@chakra-ui/react";
+import { Box, HStack, Heading, Button,Text } from "@chakra-ui/react";
 import { FaUserTie } from "react-icons/fa";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import { deleteEmployee, getAllEmployees } from "../../../../apis/resource1";
@@ -73,19 +73,24 @@ const HrEmployee = () => {
       data,
     });
   return (
-    <Box backgroundColor="#ECF8F9" w="100vw" h="100vh" overflow="scroll">
-      <Box display="flex">
+    <Box backgroundColor="#ECF8F9" w="100vw" h="100vh" overflow="scroll" padding={4}>
+      <Box display="flex" justifyContent="space-between" marginY="0.5rem">
         <HStack>
-          <FaUserTie />
-          <Heading> Employee Details</Heading>
+        <Text fontSize="2xl" margin="auto"> <FaUserTie/></Text>
+          <Heading fontSize="2xl"> Employee Details</Heading>
+        </HStack>
+          
+          
           <Button
             aria-label="none"
             rightIcon={<PlusSquareIcon />}
             onClick={onClickAdd}
+            border="1px solid gray"
+            alignSelf="self-end"
           >
             Add
           </Button>
-        </HStack>
+        
       </Box>
       <Table {...getTableProps()} variant="unstyled" borderRadius="0.313rem">
         <Thead bg="#FFF" boxShadow="md">

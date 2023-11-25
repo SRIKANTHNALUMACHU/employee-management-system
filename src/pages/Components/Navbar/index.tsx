@@ -26,7 +26,7 @@ const Navbar = () => {
             gap={1}
           >
             <Icon as={MdOutlinePayment} textAlign="center" my="auto" />
-            <Text>Employee Payroll Management System</Text>
+            <Text>EPMS</Text>
           </Box>
         </Link>
 

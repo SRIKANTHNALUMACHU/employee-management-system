@@ -18,7 +18,7 @@ import {
     const [data, setData] = useState({
       emailId: state?.email ?state?.email :"",
       designation: state?.designation? state?.designation:"",
-      hiredate: state?.hiredate ? state?.hiredate:"",
+      hiredate: state?.hiredate ? state?.hiredate.split('T')[0]:"",
       gender: state?.gender ? state?.gender :"Male",
       phone: state?.phone ? state?.phone :"",
       lastName: state?.lastName ? state?.lastName:"",
