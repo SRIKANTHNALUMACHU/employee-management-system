@@ -1,10 +1,12 @@
 import axios, { AxiosResponse } from "axios";
+const Url = import.meta.env.VITE_APP_APP_URL;
+console.log("url is", Url);
 
 const getAllEmployees = async (): Promise<AxiosResponse> => {
   return new Promise((resolve) => {
     axios({
       method: "GET",
-      url: "http://localhost:8080/empdata/getAllEmployees",
+      url: Url + "/empdata/getAllEmployees",
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
@@ -25,7 +27,7 @@ const deleteEmployee = async (id: number): Promise<AxiosResponse> => {
   return new Promise((resolve) => {
     axios({
       method: "DELETE",
-      url: "http://localhost:8080/empdata/delete/" + id,
+      url: Url + "/empdata/delete/" + id,
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
@@ -45,7 +47,7 @@ const addEmployee = async (data: Object): Promise<AxiosResponse> => {
   return new Promise((resolve) => {
     axios({
       method: "POST",
-      url: "http://localhost:8080/empdata/create",
+      url: Url + "/empdata/create",
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
@@ -68,7 +70,7 @@ const editEmployee = async (
   return new Promise((resolve) => {
     axios({
       method: "POST",
-      url: "http://localhost:8080/empdata/update/" + id,
+      url: Url + "/empdata/update/" + id,
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
@@ -83,4 +85,137 @@ const editEmployee = async (
       });
   });
 };
-export { getAllEmployees, addEmployee, deleteEmployee, editEmployee };
+
+const getAllDepartments = async (): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "GET",
+      url: Url + "/departments/getDepartments",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+    })
+      .then((response) => {
+        console.log("dfere", response);
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log("Error is", error);
+      });
+  });
+};
+
+const getAllPayrollRecords = async (): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "GET",
+      url: Url + "/payroll/getAllRecords",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+    })
+      .then((response) => {
+        console.log("dfere", response);
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log("Error is", error);
+      });
+  });
+};
+const getBankAccountDetailsByEmployeeId = async (
+  empId: number
+): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "GET",
+      url: Url + "/bankdetails/getBankAccountDetails?empId=" + empId,
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+    })
+      .then((response) => {
+        console.log("dfere", response);
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log("Error is", error);
+      });
+  });
+};
+
+const addPayroll = async (data: Object): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "POST",
+      url: Url + "/payroll/createPayroll",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      data: data,
+    })
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        console.log("error is", error);
+      });
+  });
+};
+
+const addBankAccount = async (data: Object): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "POST",
+      url: Url + "/bankdetails/update",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      data: data,
+    })
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        console.log("error is", error);
+      });
+  });
+};
+
+const editPayroll = async (data: Object): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "POST",
+      url: Url + "/payroll/edit",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      data: data,
+    })
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        console.log("error is", error);
+      });
+  });
+};
+
+export {
+  getAllEmployees,
+  addEmployee,
+  deleteEmployee,
+  editEmployee,
+  getAllPayrollRecords,
+  getAllDepartments,
+  addPayroll,
+  addBankAccount,
+  getBankAccountDetailsByEmployeeId,
+  editPayroll,
+};

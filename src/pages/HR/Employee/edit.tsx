@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { editEmployee } from "../../../../apis/resource";
+import { editEmployee } from "../../../apis/resource";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const EditEmployee = () => {
@@ -23,7 +23,6 @@ const EditEmployee = () => {
     phone: state?.phone ? state?.phone : "",
     lastName: state?.lastName ? state?.lastName : "",
     firstName: state?.firstName ? state?.firstName : "",
-    ssn: state?.ssn ? state?.ssn : "",
   });
 
   console.log("sra", state);

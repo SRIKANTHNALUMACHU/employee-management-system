@@ -1,9 +1,13 @@
 import { Box, HStack, Heading, Button, Text } from "@chakra-ui/react";
 import { FaUserTie } from "react-icons/fa";
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import { deleteEmployee, getAllEmployees } from "../../../../apis/resource";
+import {
+  deleteEmployee,
+  getAllDepartments,
+  getAllEmployees,
+} from "../../../apis/resource";
 import { useEffect, useState, useMemo } from "react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon, AddIcon, ViewIcon } from "@chakra-ui/icons";
 import { useTable } from "react-table";
 import { useNavigate } from "react-router-dom";
 import { Table, Thead, Tbody, Tr, Th, Td, Stack } from "@chakra-ui/react";
@@ -53,12 +57,11 @@ const HrEmployee = () => {
         accessor: "phone",
       },
       {
-        Header: "SSN",
-        accessor: "ssn",
-      },
-      {
         Header: "Designation",
         accessor: "designation",
+      },
+      {
+        Header: "Bank Details",
       },
       {
         Header: "Actions",
@@ -164,6 +167,43 @@ const HrEmployee = () => {
                                   console.log("error while deletion");
                                 });
                               setDataChanged(!dataChanged);
+                            }}
+                          />
+                        </Stack>
+                      </Td>
+                    );
+                  }
+                  if (cell.column.Header === "Bank Details") {
+                    return (
+                      <Td key={i}>
+                        <Stack
+                          direction={"row"}
+                          spacing="24px"
+                          alignItems="center"
+                          paddingLeft="1rem"
+                        >
+                          <AddIcon
+                            _hover={{ cursor: "pointer" }}
+                            w={6}
+                            h={6}
+                            color="black.500"
+                            onClick={() => {
+                              navigate("/hr/add-bank-account", {
+                                state: { empId: cell.row.original?.empId },
+                              });
+                              //console.log("edit icon",cell.row.original);
+                            }}
+                          />
+                          <ViewIcon
+                            _hover={{ cursor: "pointer" }}
+                            w={6}
+                            h={6}
+                            color="blue.500"
+                            onClick={() => {
+                              navigate("/hr/view-bank-accounts", {
+                                state: { empId: cell.row.original?.empId },
+                              });
+                              //console.log("edit icon",cell.row.original);
                             }}
                           />
                         </Stack>

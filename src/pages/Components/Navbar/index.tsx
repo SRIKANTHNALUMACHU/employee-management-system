@@ -1,4 +1,13 @@
-import { Box, Text, HStack, Button, IconButton, useDisclosure, VStack, CloseButton } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  HStack,
+  Button,
+  IconButton,
+  useDisclosure,
+  VStack,
+  CloseButton,
+} from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { MdOutlinePayment } from "react-icons/md";
@@ -32,7 +41,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <HStack spacing={4} display={{ base: "none", md: "flex" }}>
-        <Link to="/login">
+          <Link to="/login">
             <Button colorScheme="whiteAlpha">Login</Button>
           </Link>
           {/* <Link to="/employee">
@@ -48,7 +57,7 @@ const Navbar = () => {
           <Link to="/department">
             <Button colorScheme="whiteAlpha">Department</Button>
           </Link> */}
-          <Link to="/payroll">
+          <Link to="/hr-payroll">
             <Button colorScheme="whiteAlpha">Payroll</Button>
           </Link>
           <Link to="/hr-employee">
@@ -78,10 +87,31 @@ const Navbar = () => {
         >
           <CloseButton alignSelf="flex-end" onClick={onClose} />
           {/* Mobile Links */}
-          <Link to="/login"><Button w="full" colorScheme="whiteAlpha">Login</Button></Link>
-          <Link to="/payroll"><Button w="full" colorScheme="whiteAlpha">Payroll</Button></Link>
-          <Link to="/hr-employee"><Button w="full" colorScheme="whiteAlpha">Employee</Button></Link>
-          <Link to="/about"><Button w="full" colorScheme="whiteAlpha">About</Button></Link>
+          <Link to="/login">
+            <Button w="full" colorScheme="whiteAlpha">
+              Login
+            </Button>
+          </Link>
+          <Link to="/hr-payroll">
+            <Button w="full" colorScheme="whiteAlpha">
+              Payroll
+            </Button>
+          </Link>
+          <Link to="/hr-employee">
+            <Button w="full" colorScheme="whiteAlpha">
+              Employee
+            </Button>
+          </Link>
+          <Link to="/employee/view">
+            <Button w="full" colorScheme="whiteAlpha">
+              View
+            </Button>
+          </Link>
+          <Link to="/about">
+            <Button w="full" colorScheme="whiteAlpha">
+              About
+            </Button>
+          </Link>
           {/* Add more links as needed */}
         </VStack>
       )}

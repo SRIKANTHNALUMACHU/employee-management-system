@@ -9,8 +9,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { addEmployee } from "../../../../apis/resource";
+import { addEmployee, getAllDepartments } from "../../../apis/resource";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AddEmployee = () => {
   const [data, setData] = useState({
@@ -21,9 +22,23 @@ const AddEmployee = () => {
     phone: "",
     lastName: "",
     firstName: "",
-    ssn: "777",
+    departmentId: "",
   });
+  const [departments, SetDepartments] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getData() {
+      await getAllDepartments()
+        .then((res) => {
+          SetDepartments(res);
+        })
+        .catch((err) => {
+          console.log("error is", err);
+        });
+    }
+    getData();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,7 +110,7 @@ const AddEmployee = () => {
           <FormControl>
             <FormLabel htmlFor="phone">Phone</FormLabel>
             <Input
-              type="text"
+              type="number"
               id="phone"
               name="phone"
               onChange={(e) => {
@@ -114,6 +129,7 @@ const AddEmployee = () => {
             >
               <option value="Male">Male</option>
               <option value="Female">Female</option>
+              <option value="Others">Others</option>
             </Select>
           </FormControl>
           <FormControl>
@@ -123,8 +139,12 @@ const AddEmployee = () => {
               id="hiredate"
               name="hiredate"
               onChange={(e) => {
+                const date = new Date();
+                console.log("daf", date.getDate());
+                console.log(e.target.value);
                 onChangeInput(e);
               }}
+              max={new Date().getDate()}
             />
           </FormControl>
           <FormControl>
@@ -137,6 +157,25 @@ const AddEmployee = () => {
                 onChangeInput(e);
               }}
             />
+          </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="department">Department</FormLabel>
+            <Select
+              id="department"
+              name="departmentId"
+              onChange={(e) => {
+                onChangeInput(e);
+              }}
+              placeholder="Select department"
+            >
+              {departments.map((item) => {
+                return (
+                  <option value={item?.departmentId}>
+                    {item?.departmentName}
+                  </option>
+                );
+              })}
+            </Select>
           </FormControl>
           <Button type="submit" colorScheme="blue">
             Submit
