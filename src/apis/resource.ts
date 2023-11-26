@@ -20,12 +20,12 @@ const getAllEmployees = async (): Promise<AxiosResponse> => {
   });
 };
 
-const deleteEmployee  = async (id:number): Promise<AxiosResponse> =>{
-  console.log("id is",id)
+const deleteEmployee = async (id: number): Promise<AxiosResponse> => {
+  console.log("id is", id);
   return new Promise((resolve) => {
     axios({
       method: "DELETE",
-      url: "http://localhost:8080/empdata/delete/"+id,
+      url: "http://localhost:8080/empdata/delete/" + id,
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
@@ -39,7 +39,7 @@ const deleteEmployee  = async (id:number): Promise<AxiosResponse> =>{
         console.log("Error is", error);
       });
   });
-}
+};
 
 const addEmployee = async (data: Object): Promise<AxiosResponse> => {
   return new Promise((resolve) => {
@@ -61,12 +61,14 @@ const addEmployee = async (data: Object): Promise<AxiosResponse> => {
   });
 };
 
-
-const editEmployee = async (data: Object, id: number): Promise<AxiosResponse> => {
+const editEmployee = async (
+  data: Object,
+  id: number
+): Promise<AxiosResponse> => {
   return new Promise((resolve) => {
     axios({
       method: "POST",
-      url: "http://localhost:8080/empdata/update/"+id,
+      url: "http://localhost:8080/empdata/update/" + id,
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
@@ -81,4 +83,4 @@ const editEmployee = async (data: Object, id: number): Promise<AxiosResponse> =>
       });
   });
 };
-export { getAllEmployees, addEmployee ,deleteEmployee, editEmployee};
+export { getAllEmployees, addEmployee, deleteEmployee, editEmployee };

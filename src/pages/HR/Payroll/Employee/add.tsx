@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { addEmployee } from "../../../../apis/resource1";
+import { addEmployee } from "../../../../apis/resource";
 import { useNavigate } from "react-router-dom";
 
 const AddEmployee = () => {
@@ -21,24 +21,25 @@ const AddEmployee = () => {
     phone: "",
     lastName: "",
     firstName: "",
-    ssn:"777"
-  }); 
-  const navigate=useNavigate()
+    ssn: "777",
+  });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("add employee");
     console.log(data);
-    await addEmployee(data).then(()=>{
-      console.log("added ")
-      navigate('/hr-employee')
-    }).catch((err)=>{
-      console.log("error is",err)
-    })
-
+    await addEmployee(data)
+      .then(() => {
+        console.log("added ");
+        navigate("/hr-employee");
+      })
+      .catch((err) => {
+        console.log("error is", err);
+      });
   };
   const onChangeInput = (e) => {
-    setData({ ...data,[e.target.name]: e.target.value  });
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   return (

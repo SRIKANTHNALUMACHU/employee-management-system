@@ -1,7 +1,7 @@
 import { Box, HStack, Heading, Button, Text } from "@chakra-ui/react";
 import { FaUserTie } from "react-icons/fa";
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import { deleteEmployee, getAllEmployees } from "../../../../apis/resource1";
+import { deleteEmployee, getAllEmployees } from "../../../../apis/resource";
 import { useEffect, useState, useMemo } from "react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useTable } from "react-table";
