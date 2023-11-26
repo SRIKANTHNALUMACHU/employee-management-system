@@ -1,16 +1,16 @@
-import { Box, HStack, Heading, Button,Text } from "@chakra-ui/react";
+import { Box, HStack, Heading, Button, Text } from "@chakra-ui/react";
 import { FaUserTie } from "react-icons/fa";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import { deleteEmployee, getAllEmployees } from "../../../../apis/resource1";
 import { useEffect, useState, useMemo } from "react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useTable } from "react-table";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { Table, Thead, Tbody, Tr, Th, Td, Stack } from "@chakra-ui/react";
 
 const HrEmployee = () => {
   const [data, setData] = useState([]);
-  const [dataChanged,setDataChanged]=useState(false)
+  const [dataChanged, setDataChanged] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     async function getData() {
@@ -61,8 +61,8 @@ const HrEmployee = () => {
         accessor: "designation",
       },
       {
-        Header:"Actions"
-      }
+        Header: "Actions",
+      },
     ],
     []
   );
@@ -73,24 +73,36 @@ const HrEmployee = () => {
       data,
     });
   return (
-    <Box backgroundColor="#ECF8F9" w="100vw" h="100vh" overflow="scroll" padding={4}>
-      <Box display="flex" justifyContent="space-between" marginY="0.5rem">
+    <Box
+      backgroundColor="#ECF8F9"
+      w="100vw"
+      h="100vh"
+      overflow="scroll"
+      padding={4}
+    >
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        marginY="0.5rem"
+        marginLeft="0.5rem"
+      >
         <HStack>
-        <Text fontSize="2xl" margin="auto"> <FaUserTie/></Text>
+          <Text fontSize="2xl" margin="auto">
+            {" "}
+            <FaUserTie />
+          </Text>
           <Heading fontSize="2xl"> Employee Details</Heading>
         </HStack>
-          
-          
-          <Button
-            aria-label="none"
-            rightIcon={<PlusSquareIcon />}
-            onClick={onClickAdd}
-            border="1px solid gray"
-            alignSelf="self-end"
-          >
-            Add
-          </Button>
-        
+
+        <Button
+          aria-label="none"
+          rightIcon={<PlusSquareIcon />}
+          onClick={onClickAdd}
+          border="1px solid gray"
+          alignSelf="self-end"
+        >
+          Add
+        </Button>
       </Box>
       <Table {...getTableProps()} variant="unstyled" borderRadius="0.313rem">
         <Thead bg="#FFF" boxShadow="md">
@@ -120,40 +132,41 @@ const HrEmployee = () => {
                   if (cell.column.Header === "Actions") {
                     return (
                       <Td key={i}>
-                      <Stack
-                        direction={"row"}
-                        spacing="24px"
-                        alignItems="center"
-                        paddingLeft="1rem"
-                      >
-                        <EditIcon
-                          _hover={{ cursor: "pointer" }}
-                          w={6}
-                          h={6}
-                          color="black.500"
-                          onClick={() => {
-
-                            navigate("/hr/edit-employee",{state:cell.row.original})
-                            //console.log("edit icon",cell.row.original);
-                          }}
-                        />
-                        <DeleteIcon
-                          _hover={{ cursor: "pointer" }}
-                          w={6}
-                          h={6}
-                          color="red.500"
-                          onClick={async() => {
-                           await deleteEmployee(cell.row.original?.empId).then(()=>{
-                              console.log("successfully deleted")
-                            }).catch((err)=>{
-                              console.log("error while deletion")
-                            })
-                            setDataChanged(!dataChanged
-                              )
-                            
-                          }}
-                        />
-                      </Stack>
+                        <Stack
+                          direction={"row"}
+                          spacing="24px"
+                          alignItems="center"
+                          paddingLeft="1rem"
+                        >
+                          <EditIcon
+                            _hover={{ cursor: "pointer" }}
+                            w={6}
+                            h={6}
+                            color="black.500"
+                            onClick={() => {
+                              navigate("/hr/edit-employee", {
+                                state: cell.row.original,
+                              });
+                              //console.log("edit icon",cell.row.original);
+                            }}
+                          />
+                          <DeleteIcon
+                            _hover={{ cursor: "pointer" }}
+                            w={6}
+                            h={6}
+                            color="red.500"
+                            onClick={async () => {
+                              await deleteEmployee(cell.row.original?.empId)
+                                .then(() => {
+                                  console.log("successfully deleted");
+                                })
+                                .catch((err) => {
+                                  console.log("error while deletion");
+                                });
+                              setDataChanged(!dataChanged);
+                            }}
+                          />
+                        </Stack>
                       </Td>
                     );
                   }
@@ -167,7 +180,7 @@ const HrEmployee = () => {
                         fontStyle="normal"
                         color="#545454"
                       >
-                        {console.log("cell",cell.row.original?.empId)}
+                        {console.log("cell", cell.row.original?.empId)}
                         {cell?.value?.toString()?.split("T")[0]}
                       </Td>
                     );
@@ -188,15 +201,6 @@ const HrEmployee = () => {
               </Tr>
             );
           })}
-
-          <Tr>
-            <Td
-              fontSize="0.875rem"
-              lineHeight="1.313rem"
-              fontStyle="normal"
-              color="#545454"
-            ></Td>
-          </Tr>
         </Tbody>
       </Table>
     </Box>
