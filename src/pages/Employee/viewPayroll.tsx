@@ -3,7 +3,7 @@ import { FaUserTie } from "react-icons/fa";
 
 import { getPayrollById } from "../../apis/resource";
 import { useEffect, useState, useMemo } from "react";
-
+import { FaReceipt } from "react-icons/fa";
 import { useTable } from "react-table";
 
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
@@ -84,7 +84,7 @@ const ViewPayroll = () => {
         <HStack>
           <Text fontSize="2xl" margin="auto">
             {" "}
-            <FaUserTie />
+            <FaReceipt />
           </Text>
           <Heading fontSize="2xl"> Payroll Details</Heading>
         </HStack>

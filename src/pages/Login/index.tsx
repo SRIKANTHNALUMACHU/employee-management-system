@@ -1,4 +1,5 @@
 import { Box, Input, Button, Text } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import image from "../../assets/employee_background.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleLogin = async () => {
     await verification({ username, password })
@@ -15,10 +17,23 @@ const Login = () => {
         localStorage.setItem("roleDetails", JSON.stringify(res.data));
         localStorage.setItem("isAuthenticated", "true");
         localStorage.setItem("isLoggedIn", "false");
+        toast({
+          title: "Login Successful",
+          status: "success",
+          duration: 3500,
+          isClosable: true,
+        });
         navigate("/", { replace: true });
       })
       .catch((err) => {
         console.log("err is", err);
+        toast({
+          title: "Login Failed",
+          description: "Please check the credentials and try again",
+          status: "error",
+          duration: 3500,
+          isClosable: true,
+        });
       });
     console.log("handle button clicked");
   };
