@@ -227,6 +227,26 @@ const addDepartment = async (data: Object): Promise<AxiosResponse> => {
   });
 };
 
+const getAllTimeSheets = async (): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "GET",
+      url: Url + "/timesheet/getAllTimeSheets",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+    })
+      .then((response) => {
+        console.log("dfere", response);
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log("Error is", error);
+      });
+  });
+};
+
 export {
   getAllEmployees,
   addEmployee,
@@ -239,4 +259,5 @@ export {
   getBankAccountDetailsByEmployeeId,
   editPayroll,
   addDepartment,
+  getAllTimeSheets,
 };
