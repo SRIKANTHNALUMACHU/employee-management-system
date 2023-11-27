@@ -19,6 +19,9 @@ import HrDepartments from "./pages/HR/Department";
 import AddDepartment from "./pages/HR/Department/add";
 import HrTimeSheet from "./pages/HR/TimeSheets";
 import AddTimesheet from "./pages/HR/TimeSheets/add";
+import ViewPayroll from "./pages/Employee/viewPayroll";
+import ViewTimeSheet from "./pages/Employee/ViewTimeSheet";
+import PunchIn from "./pages/Employee/PunchIn";
 
 function App() {
   return (
@@ -37,12 +40,15 @@ function App() {
           <Route path="/hr/add-payroll" element={<AddPayroll />} />
           <Route path="/hr/edit-payroll" element={<EditPayroll />} />
           <Route path="/employee/view" element={<ViewEmployee />} />
+          <Route path="/employee/view-payroll" element={<ViewPayroll />} />
           <Route path="/hr/add-bank-account" element={<AddBankAccount />} />
           <Route path="/hr/view-bank-accounts" element={<ViewBankAccounts />} />
           <Route path="/hr-departments" element={<HrDepartments />} />
           <Route path="/hr/add-department" element={<AddDepartment />} />
           <Route path="/hr-timesheet" element={<HrTimeSheet />} />
           <Route path="/hr/add-timesheet" element={<AddTimesheet />} />
+          <Route path="/employee/view-timesheet" element={<ViewTimeSheet />} />
+          <Route path="/employee/punch-in" element={<PunchIn />} />
         </Routes>
       </Router>
     </Box>

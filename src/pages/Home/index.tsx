@@ -10,8 +10,15 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 const Home = () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  useEffect(() => {
+    if (isLoggedIn === "false") {
+      localStorage.setItem("isLoggedIn", "true");
+      location.reload();
+    }
+  }, []);
   const SocialButton = ({
     children,
     label,
@@ -71,6 +78,7 @@ const Home = () => {
             bg="#191D88"
             rounded={5}
             alignContent="center"
+            boxShadow="2xl"
           >
             {" "}
             Employees
@@ -84,7 +92,14 @@ const Home = () => {
               and reference purposes.
             </Text>
           </Box>
-          <Box width={300} height={300} bg="#1450A3" rounded={5} p={2}>
+          <Box
+            width={300}
+            height={300}
+            bg="#1450A3"
+            rounded={5}
+            p={2}
+            boxShadow="2xl"
+          >
             {" "}
             Payroll
             <Text color="#E7F6F2">
@@ -105,6 +120,7 @@ const Home = () => {
             rounded={5}
             color="#E7F6F2"
             p={2}
+            boxShadow="2xl"
           >
             {" "}
             TimeSheets
@@ -115,7 +131,14 @@ const Home = () => {
               management
             </Text>
           </Box>
-          <Box width={300} height={200} bg="#4E31AA" rounded={5} p={2}>
+          <Box
+            width={300}
+            height={200}
+            bg="#4E31AA"
+            rounded={5}
+            p={2}
+            boxShadow="2xl"
+          >
             {" "}
             Departments
             <Text color="#E7F6F2">
@@ -126,7 +149,7 @@ const Home = () => {
           </Box>
         </HStack>
       </Box>
-      <Box position="fixed" bottom="0" height="4.05rem" width="100vw">
+      <Box position="fixed" bottom="0" height="4rem" width="100vw">
         {" "}
         <Box
           bg={useColorModeValue("gray.50", "gray.900")}

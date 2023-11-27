@@ -14,6 +14,7 @@ const Login = () => {
         console.log("res", res);
         localStorage.setItem("roleDetails", JSON.stringify(res.data));
         localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("isLoggedIn", "false");
         navigate("/", { replace: true });
       })
       .catch((err) => {

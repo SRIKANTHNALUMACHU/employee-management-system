@@ -7,16 +7,22 @@ import {
   useDisclosure,
   VStack,
   CloseButton,
+  Avatar,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { MdOutlinePayment } from "react-icons/md";
 import { Icon } from "@chakra-ui/react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isAuthenticated = localStorage.getItem("isAuthenticated");
-
+  const [role, setRole] = useState(
+    JSON.parse(localStorage.getItem("roleDetails"))?.roles[0]
+  );
+  const navigate = useNavigate();
   return (
     <Box as="header" bg="#363062" p={1} borderRadius={1} boxShadow="sm">
       <HStack
@@ -41,7 +47,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        {isAuthenticated === "true" ? (
+        {isAuthenticated === "true" && role === "ROLE_HR" && (
           <HStack spacing={4} display={{ base: "none", md: "flex" }}>
             <Link to="/hr-timesheet">
               <Button colorScheme="whiteAlpha">Timesheets</Button>
@@ -70,20 +76,55 @@ const Navbar = () => {
                 Departments
               </Button>
             </Link>
-            <Link to="/employee/view">
-              <Button w="full" colorScheme="whiteAlpha">
-                View
-              </Button>
-            </Link>
+
+            <Button
+              colorScheme="whiteAlpha"
+              onClick={() => {
+                localStorage.clear();
+                navigate("/");
+              }}
+            >
+              Logout
+            </Button>
             {/* <Link to="/about">
             <Button colorScheme="whiteAlpha">About</Button>
           </Link> */}
           </HStack>
-        ) : (
-          <Link to="/login">
-            <Button colorScheme="whiteAlpha">Login</Button>
-          </Link>
         )}
+
+        {isAuthenticated === "true" && role === "ROLE_EMPLOYEE" && (
+          <HStack>
+            <Button
+              colorScheme="whiteAlpha"
+              onClick={() => {
+                localStorage.clear();
+
+                navigate("/");
+              }}
+            >
+              Logout
+            </Button>
+            <Link to="/employee/view-payroll">
+              <Button w="full" colorScheme="whiteAlpha">
+                View Payroll
+              </Button>
+            </Link>
+            <Link to="/employee/view-timesheet">
+              <Button w="full" colorScheme="whiteAlpha">
+                View Timesheets
+              </Button>
+            </Link>
+            <Link to="/employee/view">
+              <Avatar src="https://bit.ly/broken-link" size="sm" />
+            </Link>
+          </HStack>
+        )}
+        {isAuthenticated === "false" ||
+          (!isAuthenticated && (
+            <Link to="/login">
+              <Button colorScheme="whiteAlpha">Login</Button>
+            </Link>
+          ))}
 
         {/* Mobile Menu Button */}
         <IconButton

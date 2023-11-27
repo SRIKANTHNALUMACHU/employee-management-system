@@ -1,11 +1,7 @@
 import { Box, HStack, Heading, Button, Text } from "@chakra-ui/react";
 import { FaUserTie } from "react-icons/fa";
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import {
-  deleteEmployee,
-  getAllDepartments,
-  getAllEmployees,
-} from "../../../apis/resource";
+import { deleteEmployee, getAllEmployees } from "../../../apis/resource";
 import { useEffect, useState, useMemo } from "react";
 import { DeleteIcon, EditIcon, AddIcon, ViewIcon } from "@chakra-ui/icons";
 import { useTable } from "react-table";
@@ -36,9 +32,12 @@ const HrEmployee = () => {
   const columns = useMemo(
     () => [
       {
+        Header: "ID",
+        accessor: "empId",
+      },
+      {
         Header: "First Name",
         accessor: "firstName",
-        sticky: "left",
       },
       {
         Header: "Last Name",

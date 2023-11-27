@@ -2,16 +2,19 @@ import { Box, Input, Button } from "@chakra-ui/react";
 import { useState } from "react";
 import image from "../../assets/employee_background.jpg";
 import { register } from "../../apis/auth";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     await register({ email: email, username: username, password: password })
       .then((res) => {
         console.log("response is", res);
+        navigate("/login");
       })
       .catch((err) => {
         console.log("error is", err);
