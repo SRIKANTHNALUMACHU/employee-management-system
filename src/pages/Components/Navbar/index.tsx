@@ -15,6 +15,7 @@ import { Icon } from "@chakra-ui/react";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
 
   return (
     <Box as="header" bg="#363062" p={1} borderRadius={1} boxShadow="sm">
@@ -40,14 +41,12 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <HStack spacing={4} display={{ base: "none", md: "flex" }}>
-          <Link to="/login">
-            <Button colorScheme="whiteAlpha">Login</Button>
-          </Link>
-          <Link to="/hr-timesheet">
-            <Button colorScheme="whiteAlpha">Timesheets</Button>
-          </Link>
-          {/* <Link to="/employee">
+        {isAuthenticated === "true" ? (
+          <HStack spacing={4} display={{ base: "none", md: "flex" }}>
+            <Link to="/hr-timesheet">
+              <Button colorScheme="whiteAlpha">Timesheets</Button>
+            </Link>
+            {/* <Link to="/employee">
             <Button colorScheme="whiteAlpha">Employee</Button>
           </Link>
           <Link to="/time-sheet">
@@ -60,21 +59,31 @@ const Navbar = () => {
           <Link to="/department">
             <Button colorScheme="whiteAlpha">Department</Button>
           </Link> */}
-          <Link to="/hr-payroll">
-            <Button colorScheme="whiteAlpha">Payroll</Button>
-          </Link>
-          <Link to="/hr-employee">
-            <Button colorScheme="whiteAlpha">Employee</Button>
-          </Link>
-          <Link to="/hr-departments">
-            <Button w="full" colorScheme="whiteAlpha">
-              Departments
-            </Button>
-          </Link>
-          {/* <Link to="/about">
+            <Link to="/hr-payroll">
+              <Button colorScheme="whiteAlpha">Payroll</Button>
+            </Link>
+            <Link to="/hr-employee">
+              <Button colorScheme="whiteAlpha">Employee</Button>
+            </Link>
+            <Link to="/hr-departments">
+              <Button w="full" colorScheme="whiteAlpha">
+                Departments
+              </Button>
+            </Link>
+            <Link to="/employee/view">
+              <Button w="full" colorScheme="whiteAlpha">
+                View
+              </Button>
+            </Link>
+            {/* <Link to="/about">
             <Button colorScheme="whiteAlpha">About</Button>
           </Link> */}
-        </HStack>
+          </HStack>
+        ) : (
+          <Link to="/login">
+            <Button colorScheme="whiteAlpha">Login</Button>
+          </Link>
+        )}
 
         {/* Mobile Menu Button */}
         <IconButton

@@ -1,6 +1,6 @@
 import { Box, HStack, Heading, Text } from "@chakra-ui/react";
-import { MdAccountBalance } from "react-icons/md";
-import { getBankAccountDetailsByEmployeeId } from "../../apis/resource";
+import { FaUserTie } from "react-icons/fa";
+import { getEmployeeDetailsById } from "../../apis/resource";
 import { useEffect, useState, useMemo } from "react";
 
 import { useTable } from "react-table";
@@ -9,41 +9,47 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 const ViewBankAccounts = () => {
   const roleData = localStorage.getItem("roleDetails");
   const roleDetails = roleData && JSON.parse(roleData);
-  console.log("details", roleDetails);
 
   const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   async function getData() {
-  //     await getBankAccountDetailsByEmployeeId()
-  //       .then((res) => {
-  //         setData([res]);
-  //       })
-  //       .catch((err) => {
-  //         console.log("error is", err);
-  //       });
-  //   }
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    async function getData() {
+      await getEmployeeDetailsById(roleDetails.employeeId)
+        .then((res) => {
+          setData([res]);
+        })
+        .catch((err) => {
+          console.log("error is", err);
+        });
+    }
+    getData();
+  }, []);
   console.log("Data is", data);
 
   const columns = useMemo(
     () => [
       {
-        Header: "Account Number",
-        accessor: "accountNumber",
+        Header: "First Name",
+        accessor: "firstName",
       },
       {
-        Header: "Bank Location",
-        accessor: "bankLocation",
+        Header: "Last Name",
+        accessor: "lastName",
       },
       {
-        Header: "Bank Name",
-        accessor: "bankName",
+        Header: "Designation",
+        accessor: "designation",
       },
-
       {
-        Header: "Routing Number",
-        accessor: "routingNumber",
+        Header: "Email",
+        accessor: "email",
+      },
+      {
+        Header: "Gender",
+        accessor: "gender",
+      },
+      {
+        Header: "Phone",
+        accessor: "phone",
       },
     ],
     []
@@ -71,9 +77,9 @@ const ViewBankAccounts = () => {
         <HStack>
           <Text fontSize="2xl" margin="auto">
             {" "}
-            <MdAccountBalance />
+            <FaUserTie />
           </Text>
-          <Heading fontSize="2xl">Bank Account Details</Heading>
+          <Heading fontSize="2xl">Employee Details</Heading>
         </HStack>
       </Box>
       {data[0] !== "" ? (

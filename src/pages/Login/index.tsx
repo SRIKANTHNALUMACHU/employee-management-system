@@ -1,17 +1,20 @@
 import { Box, Input, Button, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import image from "../../assets/employee_background.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { verification } from "../../apis/auth";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     await verification({ username, password })
       .then((res) => {
         console.log("res", res);
-        localStorage.setItem("roleDetails", JSON.stringify(res));
+        localStorage.setItem("roleDetails", JSON.stringify(res.data));
+        localStorage.setItem("isAuthenticated", "true");
+        navigate("/", { replace: true });
       })
       .catch((err) => {
         console.log("err is", err);

@@ -134,7 +134,7 @@ const Home = () => {
         >
           <Container
             as={Stack}
-            maxW={"6xl"}
+            maxW={"4xl"}
             py={4}
             direction={{ base: "column", md: "row" }}
             justify={{ base: "center", md: "space-between" }}
