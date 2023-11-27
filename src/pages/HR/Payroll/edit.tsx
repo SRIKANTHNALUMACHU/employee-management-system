@@ -59,7 +59,7 @@ const EditPayroll = () => {
       </Text>
       <form onSubmit={handleSubmit}>
         <VStack spacing="4" align="stretch">
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="basePay">Base Pay</FormLabel>
             <Input
               type="number"
@@ -71,7 +71,7 @@ const EditPayroll = () => {
               value={data.basePay}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="variablePay">Variable Pay</FormLabel>
             <Input
               type="number"
@@ -83,7 +83,7 @@ const EditPayroll = () => {
               value={data.variablePay}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="taxAmount">Tax Amount</FormLabel>
             <Input
               type="number"
@@ -95,7 +95,7 @@ const EditPayroll = () => {
               value={data.taxes}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="totalPaid">Total Salary</FormLabel>
             <Input
               type="number"
@@ -107,7 +107,7 @@ const EditPayroll = () => {
               value={data.totalPaid}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="payDate">Pay Date</FormLabel>
             <Input
               type="date"

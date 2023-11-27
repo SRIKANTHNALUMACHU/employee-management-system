@@ -207,6 +207,26 @@ const editPayroll = async (data: Object): Promise<AxiosResponse> => {
   });
 };
 
+const addDepartment = async (data: Object): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "POST",
+      url: Url + "/departments/createdepartment",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      data: data,
+    })
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        console.log("error is", error);
+      });
+  });
+};
+
 export {
   getAllEmployees,
   addEmployee,
@@ -218,4 +238,5 @@ export {
   addBankAccount,
   getBankAccountDetailsByEmployeeId,
   editPayroll,
+  addDepartment,
 };

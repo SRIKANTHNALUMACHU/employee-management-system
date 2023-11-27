@@ -60,7 +60,7 @@ const EditEmployee = () => {
       </Text>
       <form onSubmit={handleSubmit}>
         <VStack spacing="4" align="stretch">
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="firstName">First Name</FormLabel>
             <Input
               type="text"
@@ -72,7 +72,7 @@ const EditEmployee = () => {
               value={data.firstName}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="lastName">Last Name</FormLabel>
             <Input
               type="text"
@@ -84,7 +84,7 @@ const EditEmployee = () => {
               value={data.lastName}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="email">Email</FormLabel>
             <Input
               type="email"
@@ -96,7 +96,7 @@ const EditEmployee = () => {
               value={data.emailId}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="phone">Phone</FormLabel>
             <Input
               type="text"
@@ -108,7 +108,7 @@ const EditEmployee = () => {
               value={data.phone}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="gender">Gender</FormLabel>
             <Select
               id="gender"
@@ -122,7 +122,7 @@ const EditEmployee = () => {
               <option value="Female">Female</option>
             </Select>
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="hiredate">Hire Date</FormLabel>
             <Input
               type="date"
@@ -134,7 +134,7 @@ const EditEmployee = () => {
               value={data.hiredate}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="designation">Designation</FormLabel>
             <Input
               type="text"

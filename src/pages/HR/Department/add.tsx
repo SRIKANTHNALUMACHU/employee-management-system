@@ -2,36 +2,51 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Select,
   Button,
   VStack,
   Box,
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { addBankAccount } from "../../../apis/resource";
-import { useNavigate, useLocation } from "react-router-dom";
+import {
+  addDepartment,
+  addEmployee,
+  getAllDepartments,
+} from "../../../apis/resource";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-const AddBankAccount = () => {
-  const { state } = useLocation();
-  const empId = state?.empId ? state.empId : "";
+const AddDepartment = () => {
   const [data, setData] = useState({
-    accountNumber: "",
-    bankName: "",
-    branchLocation: "",
-    employeeId: empId,
-    routingNumber: "",
+    departmentEmailId: "",
+    departmentName: "",
+    managerName: "",
   });
-
+  const [departments, SetDepartments] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getData() {
+      await getAllDepartments()
+        .then((res) => {
+          SetDepartments(res);
+        })
+        .catch((err) => {
+          console.log("error is", err);
+        });
+    }
+    getData();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("add employee");
     console.log(data);
-    await addBankAccount(data)
+    await addDepartment(data)
       .then(() => {
         console.log("added ");
-        navigate("/hr-employee");
+        navigate("/hr-departments");
       })
       .catch((err) => {
         console.log("error is", err);
@@ -50,53 +65,43 @@ const AddBankAccount = () => {
       p="4"
       borderWidth="1px"
       borderRadius="lg"
-      marginY="3rem"
+      marginTop="3rem"
     >
       <Text fontSize="xl" mb="4" textAlign="center">
-        Add Bank Account
+        Add Department
       </Text>
       <form onSubmit={handleSubmit}>
         <VStack spacing="4" align="stretch">
           <FormControl isRequired>
-            <FormLabel htmlFor="accountNumber">Account Number</FormLabel>
-            <Input
-              type="number"
-              id="accountNumber"
-              name="accountNumber"
-              onChange={(e) => {
-                onChangeInput(e);
-              }}
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="bankName">Bank Name</FormLabel>
+            <FormLabel htmlFor="departmentEmailId">
+              Department Email ID
+            </FormLabel>
             <Input
               type="text"
-              id="bankName"
-              name="bankName"
+              id="departmentEmailId"
+              name="departmentEmailId"
               onChange={(e) => {
                 onChangeInput(e);
               }}
             />
           </FormControl>
           <FormControl isRequired>
-            <FormLabel htmlFor="branchLocation">Branch Location</FormLabel>
+            <FormLabel htmlFor="lastName">Department Name</FormLabel>
             <Input
               type="text"
-              id="branchLocation"
-              name="branchLocation"
+              id="departmentName"
+              name="departmentName"
               onChange={(e) => {
                 onChangeInput(e);
               }}
             />
           </FormControl>
-
           <FormControl isRequired>
-            <FormLabel htmlFor="routingNumber">Routing Number</FormLabel>
+            <FormLabel htmlFor="managerName">Manager Name</FormLabel>
             <Input
-              type="number"
-              id="routingNumber"
-              name="routingNumber"
+              type="text"
+              id="managerName"
+              name="managerName"
               onChange={(e) => {
                 onChangeInput(e);
               }}
@@ -111,4 +116,4 @@ const AddBankAccount = () => {
   );
 };
 
-export default AddBankAccount;
+export default AddDepartment;

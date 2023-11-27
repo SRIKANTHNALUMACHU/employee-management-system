@@ -2,31 +2,32 @@ import { Box, Input, Button, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import image from "../../assets/employee_background.jpg";
 import { Link } from "react-router-dom";
+import { verification } from "../../apis/auth";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    fetch("8473-2600-6c5a-7f-a54c-3552-5e6c-20af-c494.ngrok-free.app/test")
-      .then()
+  const handleLogin = async () => {
+    await verification({ username, password })
       .then((res) => {
-        console.log("rea0", res);
+        console.log("res", res);
       })
       .catch((err) => {
-        console.log("erer", err);
+        console.log("err is", err);
       });
     console.log("handle button clicked");
   };
   return (
-    <Box backgroundImage={image} w="100vw" h="100vh" pt="30vh">
+    <Box backgroundImage={image} w="100vw" h="100vh">
       <Box
         p={4}
         maxW="md"
         borderWidth={1}
         borderRadius="md"
-        marginLeft="35rem"
         boxShadow="2xl"
         bg="#FFFBF5"
+        marginX="auto"
+        marginTop="12rem"
       >
         <Input
           mb={4}

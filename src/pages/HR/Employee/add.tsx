@@ -73,7 +73,7 @@ const AddEmployee = () => {
       </Text>
       <form onSubmit={handleSubmit}>
         <VStack spacing="4" align="stretch">
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="firstName">First Name</FormLabel>
             <Input
               type="text"
@@ -82,10 +82,9 @@ const AddEmployee = () => {
               onChange={(e) => {
                 onChangeInput(e);
               }}
-              value={data.firstName}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="lastName">Last Name</FormLabel>
             <Input
               type="text"
@@ -96,7 +95,7 @@ const AddEmployee = () => {
               }}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="email">Email</FormLabel>
             <Input
               type="email"
@@ -107,7 +106,7 @@ const AddEmployee = () => {
               }}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="phone">Phone</FormLabel>
             <Input
               type="number"
@@ -118,7 +117,7 @@ const AddEmployee = () => {
               }}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="gender">Gender</FormLabel>
             <Select
               id="gender"
@@ -132,7 +131,7 @@ const AddEmployee = () => {
               <option value="Others">Others</option>
             </Select>
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="hiredate">Hire Date</FormLabel>
             <Input
               type="date"
@@ -147,7 +146,7 @@ const AddEmployee = () => {
               max={new Date().getDate()}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="designation">Designation</FormLabel>
             <Input
               type="text"
@@ -158,7 +157,7 @@ const AddEmployee = () => {
               }}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel htmlFor="department">Department</FormLabel>
             <Select
               id="department"

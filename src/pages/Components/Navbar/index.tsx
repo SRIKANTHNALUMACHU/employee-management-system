@@ -63,6 +63,11 @@ const Navbar = () => {
           <Link to="/hr-employee">
             <Button colorScheme="whiteAlpha">Employee</Button>
           </Link>
+          <Link to="/hr-departments">
+            <Button w="full" colorScheme="whiteAlpha">
+              Departments
+            </Button>
+          </Link>
           <Link to="/about">
             <Button colorScheme="whiteAlpha">About</Button>
           </Link>
@@ -100,6 +105,11 @@ const Navbar = () => {
           <Link to="/hr-employee">
             <Button w="full" colorScheme="whiteAlpha">
               Employee
+            </Button>
+          </Link>
+          <Link to="/hr-departments">
+            <Button w="full" colorScheme="whiteAlpha">
+              Departments
             </Button>
           </Link>
           <Link to="/employee/view">

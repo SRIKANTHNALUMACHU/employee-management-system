@@ -1,14 +1,21 @@
 import { Box, Input, Button } from "@chakra-ui/react";
 import { useState } from "react";
 import image from "../../assets/employee_background.jpg";
+import { register } from "../../apis/auth";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleRegister = () => {
-    console.log("handle button clicked");
+  const handleRegister = async () => {
+    await register({ email: email, username: username, password: password })
+      .then((res) => {
+        console.log("response is", res);
+      })
+      .catch((err) => {
+        console.log("error is", err);
+      });
   };
   return (
     <Box backgroundImage={image} w="100vw" h="100vh" pt="30vh">
