@@ -44,6 +44,9 @@ const Navbar = () => {
           <Link to="/login">
             <Button colorScheme="whiteAlpha">Login</Button>
           </Link>
+          <Link to="/hr-timesheet">
+            <Button colorScheme="whiteAlpha">Timesheets</Button>
+          </Link>
           {/* <Link to="/employee">
             <Button colorScheme="whiteAlpha">Employee</Button>
           </Link>
@@ -68,9 +71,9 @@ const Navbar = () => {
               Departments
             </Button>
           </Link>
-          <Link to="/about">
+          {/* <Link to="/about">
             <Button colorScheme="whiteAlpha">About</Button>
-          </Link>
+          </Link> */}
         </HStack>
 
         {/* Mobile Menu Button */}
@@ -84,44 +87,35 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <VStack
-          p={4}
-          display={{ md: "none" }}
-          spacing={4}
-          alignItems="flex-start"
-        >
+        <VStack p={4} display={{ md: "none" }} alignItems="flex-start">
           <CloseButton alignSelf="flex-end" onClick={onClose} />
           {/* Mobile Links */}
           <Link to="/login">
-            <Button w="full" colorScheme="whiteAlpha">
+            <Button w="full" colorScheme="whiteAlpha" mb="0.5rem">
               Login
             </Button>
           </Link>
           <Link to="/hr-payroll">
-            <Button w="full" colorScheme="whiteAlpha">
+            <Button w="full" colorScheme="whiteAlpha" mb="0.5rem">
               Payroll
             </Button>
           </Link>
           <Link to="/hr-employee">
-            <Button w="full" colorScheme="whiteAlpha">
+            <Button w="full" colorScheme="whiteAlpha" mb="0.5rem">
               Employee
             </Button>
           </Link>
           <Link to="/hr-departments">
-            <Button w="full" colorScheme="whiteAlpha">
+            <Button w="full" colorScheme="whiteAlpha" mb="0.5rem">
               Departments
             </Button>
           </Link>
           <Link to="/employee/view">
-            <Button w="full" colorScheme="whiteAlpha">
+            <Button w="full" colorScheme="whiteAlpha" mb="0.5rem">
               View
             </Button>
           </Link>
-          <Link to="/about">
-            <Button w="full" colorScheme="whiteAlpha">
-              About
-            </Button>
-          </Link>
+
           {/* Add more links as needed */}
         </VStack>
       )}

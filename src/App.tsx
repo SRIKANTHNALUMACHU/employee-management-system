@@ -18,6 +18,7 @@ import ViewBankAccounts from "./pages/HR/BankAccount/view";
 import HrDepartments from "./pages/HR/Department";
 import AddDepartment from "./pages/HR/Department/add";
 import HrTimeSheet from "./pages/HR/TimeSheets";
+import AddTimesheet from "./pages/HR/TimeSheets/add";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/hr-departments" element={<HrDepartments />} />
           <Route path="/hr/add-department" element={<AddDepartment />} />
           <Route path="/hr-timesheet" element={<HrTimeSheet />} />
+          <Route path="/hr/add-timesheet" element={<AddTimesheet />} />
         </Routes>
       </Router>
     </Box>

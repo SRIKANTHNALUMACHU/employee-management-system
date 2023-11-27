@@ -1,13 +1,10 @@
 import { Box, HStack, Heading, Button, Text } from "@chakra-ui/react";
 import { FaUserTie } from "react-icons/fa";
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import {
-  deleteEmployee,
-  getAllEmployees,
-  getAllTimeSheets,
-} from "../../../apis/resource";
+import { getAllTimeSheets } from "../../../apis/resource";
 import { useEffect, useState, useMemo } from "react";
-import { DeleteIcon, EditIcon, AddIcon, ViewIcon } from "@chakra-ui/icons";
+import { FaRegCalendarTimes } from "react-icons/fa";
+
 import { useTable } from "react-table";
 import { useNavigate } from "react-router-dom";
 import { Table, Thead, Tbody, Tr, Th, Td, Stack } from "@chakra-ui/react";
@@ -31,40 +28,26 @@ const HrTimeSheet = () => {
   }, [dataChanged]);
   const onClickAdd = () => {
     console.log("Add button clicked");
-    navigate("/hr/add-employee");
+    navigate("/hr/add-timesheet");
   };
   const columns = useMemo(
     () => [
       {
-        Header: "First Name",
-        accessor: "firstName",
+        Header: "ID",
+        accessor: "timesheet_id",
         sticky: "left",
       },
       {
-        Header: "Last Name",
-        accessor: "lastName",
+        Header: "Emp ID",
+        accessor: "employeeId",
       },
       {
-        Header: "Gender",
-        accessor: "gender",
+        Header: "Date",
+        accessor: "date",
       },
       {
-        Header: "Hired Date",
-        accessor: "hiredate",
-      },
-      {
-        Header: "Phone",
-        accessor: "phone",
-      },
-      {
-        Header: "Designation",
-        accessor: "designation",
-      },
-      {
-        Header: "Bank Details",
-      },
-      {
-        Header: "Actions",
+        Header: "No of hours worked",
+        accessor: "hoursWorked",
       },
     ],
     []
@@ -92,9 +75,9 @@ const HrTimeSheet = () => {
         <HStack>
           <Text fontSize="2xl" margin="auto">
             {" "}
-            <FaUserTie />
+            <FaRegCalendarTimes />
           </Text>
-          <Heading fontSize="2xl"> Employee Details</Heading>
+          <Heading fontSize="2xl"> Timesheet Details</Heading>
         </HStack>
 
         <Button
@@ -132,85 +115,7 @@ const HrTimeSheet = () => {
             return (
               <Tr {...row.getRowProps()}>
                 {row.cells.map((cell, i) => {
-                  if (cell.column.Header === "Actions") {
-                    return (
-                      <Td key={i}>
-                        <Stack
-                          direction={"row"}
-                          spacing="24px"
-                          alignItems="center"
-                          paddingLeft="1rem"
-                        >
-                          <EditIcon
-                            _hover={{ cursor: "pointer" }}
-                            w={6}
-                            h={6}
-                            color="black.500"
-                            onClick={() => {
-                              navigate("/hr/edit-employee", {
-                                state: cell.row.original,
-                              });
-                              //console.log("edit icon",cell.row.original);
-                            }}
-                          />
-                          <DeleteIcon
-                            _hover={{ cursor: "pointer" }}
-                            w={6}
-                            h={6}
-                            color="red.500"
-                            onClick={async () => {
-                              await deleteEmployee(cell.row.original?.empId)
-                                .then(() => {
-                                  console.log("successfully deleted");
-                                })
-                                .catch((err) => {
-                                  console.log("error while deletion");
-                                });
-                              setDataChanged(!dataChanged);
-                            }}
-                          />
-                        </Stack>
-                      </Td>
-                    );
-                  }
-                  if (cell.column.Header === "Bank Details") {
-                    return (
-                      <Td key={i}>
-                        <Stack
-                          direction={"row"}
-                          spacing="24px"
-                          alignItems="center"
-                          paddingLeft="1rem"
-                        >
-                          <AddIcon
-                            _hover={{ cursor: "pointer" }}
-                            w={6}
-                            h={6}
-                            color="black.500"
-                            onClick={() => {
-                              navigate("/hr/add-bank-account", {
-                                state: { empId: cell.row.original?.empId },
-                              });
-                              //console.log("edit icon",cell.row.original);
-                            }}
-                          />
-                          <ViewIcon
-                            _hover={{ cursor: "pointer" }}
-                            w={6}
-                            h={6}
-                            color="blue.500"
-                            onClick={() => {
-                              navigate("/hr/view-bank-accounts", {
-                                state: { empId: cell.row.original?.empId },
-                              });
-                              //console.log("edit icon",cell.row.original);
-                            }}
-                          />
-                        </Stack>
-                      </Td>
-                    );
-                  }
-                  if (cell.column.Header === "Hired Date") {
+                  if (cell.column.Header === "Date") {
                     return (
                       <Td
                         {...cell.getCellProps()}
@@ -220,7 +125,6 @@ const HrTimeSheet = () => {
                         fontStyle="normal"
                         color="#545454"
                       >
-                        {console.log("cell", cell.row.original?.empId)}
                         {cell?.value?.toString()?.split("T")[0]}
                       </Td>
                     );

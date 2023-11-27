@@ -247,6 +247,48 @@ const getAllTimeSheets = async (): Promise<AxiosResponse> => {
   });
 };
 
+const addTimesheet = async (data: Object): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "POST",
+      url: Url + "/timesheet/punch",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      data: data,
+    })
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        console.log("error is", error);
+      });
+  });
+};
+
+const getEmployeeDetailsById = async (
+  empId: number
+): Promise<AxiosResponse> => {
+  return new Promise((resolve) => {
+    axios({
+      method: "GET",
+      url: Url + "/empdata/getEmployeeById/" + empId,
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+    })
+      .then((response) => {
+        console.log("dfere", response);
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log("Error is", error);
+      });
+  });
+};
+
 export {
   getAllEmployees,
   addEmployee,
@@ -260,4 +302,6 @@ export {
   editPayroll,
   addDepartment,
   getAllTimeSheets,
+  addTimesheet,
+  getEmployeeDetailsById,
 };

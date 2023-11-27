@@ -11,6 +11,7 @@ const Login = () => {
     await verification({ username, password })
       .then((res) => {
         console.log("res", res);
+        localStorage.setItem("roleDetails", JSON.stringify(res));
       })
       .catch((err) => {
         console.log("err is", err);
