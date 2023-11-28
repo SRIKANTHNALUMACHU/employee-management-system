@@ -97,6 +97,7 @@ const AddTimesheet = () => {
               onChange={(e) => {
                 onChangeInput(e);
               }}
+              max={23}
             />
           </FormControl>
 
