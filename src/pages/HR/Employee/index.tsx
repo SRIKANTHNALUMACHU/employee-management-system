@@ -17,7 +17,7 @@ const HrEmployee = () => {
       await getAllEmployees()
         .then((res) => {
           console.log("res", res);
-          setData(res?.customers);
+          setData(res);
         })
         .catch((err) => {
           console.log("error is", err);
