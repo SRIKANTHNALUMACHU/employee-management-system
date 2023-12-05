@@ -17,7 +17,7 @@ const HrEmployee = () => {
       await getAllEmployees()
         .then((res) => {
           console.log("res", res);
-          setData(res);
+          setData(res?.customers);
         })
         .catch((err) => {
           console.log("error is", err);
@@ -136,7 +136,6 @@ const HrEmployee = () => {
                       <Td key={i}>
                         <Stack
                           direction={"row"}
-                          spacing="24px"
                           alignItems="center"
                           paddingLeft="1rem"
                         >
@@ -146,7 +145,7 @@ const HrEmployee = () => {
                             h={6}
                             color="black.500"
                             onClick={() => {
-                              navigate("/hr/edit-employee", {
+                              navigate("/edit", {
                                 state: cell.row.original,
                               });
                               //console.log("edit icon",cell.row.original);
