@@ -145,7 +145,7 @@ const HrEmployee = () => {
                             h={6}
                             color="black.500"
                             onClick={() => {
-                              navigate("/edit", {
+                              navigate("/hr/edit-employee", {
                                 state: cell.row.original,
                               });
                               //console.log("edit icon",cell.row.original);
